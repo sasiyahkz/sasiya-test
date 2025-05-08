@@ -1,30 +1,22 @@
-function downloadVideo() {
-  const url = document.getElementById("tiktokUrl").value.trim();
-  if (!url) {
-    alert("Please enter a TikTok video URL.");
-    return;
-  }
+const upload = document.getElementById("upload");
+const photo = document.getElementById("photo");
 
-  fetch(`https://tiktok-video-no-watermark.p.rapidapi.com/video?url=${encodeURIComponent(url)}`, {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': '66839d11cfmshc4c4e55a34e5a6bp1c42b9jsna9fb1862b7a9',
-      'X-RapidAPI-Host': 'tiktok-video-no-watermark.p.rapidapi.com'
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
-      if (data.video) {
-        document.getElementById("result").innerHTML = `
-          <p>Download Ready:</p>
-          <a href="${data.video}" target="_blank" download>Click here to download</a>
-        `;
-      } else {
-        document.getElementById("result").innerHTML = `<p>Video not found. Please check the URL.</p>`;
-      }
-    })
-    .catch(err => {
-      console.error(err);
-      document.getElementById("result").innerHTML = `<p>Error fetching video. Try again.</p>`;
-    });
+upload.onchange = () => {
+  const file = upload.files[0];
+  if (file) {
+    photo.src = URL.createObjectURL(file);
+    photo.style.filter = "none";
+  }
+};
+
+function applyBlur() {
+  photo.style.filter = "blur(5px)";
+}
+
+function applyCartoon() {
+  photo.style.filter = "contrast(200%) saturate(150%) brightness(110%)";
+}
+
+function resetImage() {
+  photo.style.filter = "none";
 }
