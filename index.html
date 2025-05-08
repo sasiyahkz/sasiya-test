@@ -3,129 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SASIYA PHOTO EDIT</title>
-  <style>
-    body {
-      background: #1c1c1c;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-    h1 {
-      margin-bottom: 20px;
-    }
-    input[type="file"] {
-      margin-bottom: 20px;
-    }
-    #editor {
-      margin-top: 20px;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-      border: 4px solid #555;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-    .slider-group {
-      margin: 10px 0;
-    }
-    .slider-group label {
-      display: block;
-      margin-bottom: 5px;
-    }
-    .slider-group input[type="range"] {
-      width: 80%;
-    }
-    button {
-      background: #ff3366;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      margin-top: 15px;
-      cursor: pointer;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-  </style>
+  <title>My CSS Homepage</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <h1>SASIYA PHOTO EDIT</h1>
-  <input type="file" accept="image/*" id="upload" />
-  <div id="editor" style="display:none;">
-    <img id="photo" />
-    <div class="slider-group">
-      <label for="brightness">Brightness</label>
-      <input type="range" id="brightness" min="50" max="150" value="100" />
-    </div>
-    <div class="slider-group">
-      <label for="contrast">Contrast</label>
-      <input type="range" id="contrast" min="50" max="150" value="100" />
-    </div>
-    <div class="slider-group">
-      <label for="saturation">Saturation</label>
-      <input type="range" id="saturation" min="50" max="200" value="100" />
-    </div>
-    <div class="slider-group">
-      <label for="temperature">Temperature</label>
-      <input type="range" id="temperature" min="0" max="200" value="100" />
-    </div>
-    <button onclick="downloadImage()">Download</button>
-  </div>
+  <header>
+    <h1>Welcome to My Website</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
 
-  <canvas id="canvas" style="display:none;"></canvas>
+  <main>
+    <section class="hero">
+      <h2>Your Gateway to Awesome Content</h2>
+      <p>Explore amazing features and designs built with CSS!</p>
+      <button>Get Started</button>
+    </section>
+  </main>
 
-  <script>
-    const upload = document.getElementById('upload');
-    const photo = document.getElementById('photo');
-    const editor = document.getElementById('editor');
-    const brightness = document.getElementById('brightness');
-    const contrast = document.getElementById('contrast');
-    const saturation = document.getElementById('saturation');
-    const temperature = document.getElementById('temperature');
-
-    upload.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        photo.src = reader.result;
-        editor.style.display = 'block';
-        applyFilters();
-      };
-      reader.readAsDataURL(file);
-    });
-
-    [brightness, contrast, saturation, temperature].forEach(slider => {
-      slider.addEventListener('input', applyFilters);
-    });
-
-    function applyFilters() {
-      const tempValue = temperature.value;
-      const temp = (tempValue - 100) * 0.005;
-      photo.style.filter = `
-        brightness(${brightness.value}%)
-        contrast(${contrast.value}%)
-        saturate(${saturation.value}%)
-        sepia(${Math.max(temp, 0)})
-        hue-rotate(${temp < 0 ? temp * -300 : 0}deg)
-      `;
-    }
-
-    function downloadImage() {
-      const canvas = document.getElementById('canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = photo.naturalWidth;
-      canvas.height = photo.naturalHeight;
-
-      ctx.filter = photo.style.filter;
-      ctx.drawImage(photo, 0, 0, canvas.width, canvas.height);
-
-      const link = document.createElement('a');
-      link.download = 'edited-photo.png';
-      link.href = canvas.toDataURL();
-      link.click();
-    }
-  </script>
+  <footer>
+    <p>&copy; 2025 My Website. All rights reserved.</p>
+  </footer>
 </body>
-    </html>
+</html>
