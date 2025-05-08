@@ -9,14 +9,28 @@ upload.onchange = () => {
   }
 };
 
-function applyBlur() {
-  photo.style.filter = "blur(5px)";
-}
-
-function applyCartoon() {
-  photo.style.filter = "contrast(200%) saturate(150%) brightness(110%)";
-}
-
-function resetImage() {
-  photo.style.filter = "none";
+function applyEffect(effectType) {
+  switch (effectType) {
+    case 'grayscale':
+      photo.style.filter = "grayscale(100%)";
+      break;
+    case 'sepia':
+      photo.style.filter = "sepia(100%)";
+      break;
+    case 'brightness':
+      photo.style.filter = "brightness(120%)";
+      break;
+    case 'saturate':
+      photo.style.filter = "saturate(200%)";
+      break;
+    case 'contrast':
+      photo.style.filter = "contrast(150%)";
+      break;
+    case 'hue':
+      photo.style.filter = "hue-rotate(90deg)";
+      break;
+    case 'invert':
+      photo.style.filter = "invert(100%)";
+      break;
+  }
 }
