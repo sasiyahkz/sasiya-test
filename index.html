@@ -3,32 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SASIYA GIFT</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>SASIYA TIKTOK DOWNLOADER</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <div class="container">
-    <div class="card">
-      <h1>SASIYA GIFT</h1>
-      <p>Welcome to the 3D Gift Experience</p>
-      <button id="giftButton">Open Gift</button>
-      <div id="giftMessage">You Got a Gift!</div>
-    </div>
+    <h1>SASIYA TIKTOK DOWNLOADER</h1>
+    <p>Paste your TikTok video link below:</p>
+    <input type="text" id="tiktok-url" placeholder="Enter TikTok video URL"/>
+    <button onclick="downloadVideo()">Download Video</button>
+    <p id="message"></p>
   </div>
-  <div class="fireworks" id="fireworks"></div>
-  <audio id="giftSound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
-  <script>
-    const button = document.getElementById('giftButton');
-    const message = document.getElementById('giftMessage');
-    const sound = document.getElementById('giftSound');
-    const fireworks = document.getElementById('fireworks');
 
-    button.addEventListener('click', () => {
-      message.classList.add('show');
-      sound.play();
-      fireworks.classList.add('explode');
-      setTimeout(() => fireworks.classList.remove('explode'), 3000);
-    });
+  <script>
+    function downloadVideo() {
+      const url = document.getElementById('tiktok-url').value;
+      if (!url.includes("tiktok.com")) {
+        document.getElementById("message").innerText = "Invalid TikTok URL.";
+        return;
+      }
+      window.open("https://snaptik.app?url=" + encodeURIComponent(url), "_blank");
+    }
   </script>
 </body>
 </html>
