@@ -6,18 +6,33 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+  <div class="editor">
     <h1>SASIYA AI PHOTO EDIT</h1>
     <input type="file" id="upload" accept="image/*">
-    <div class="controls">
-      <button onclick="applyBlur()">Background Blur</button>
-      <button onclick="applyCartoon()">Cartoon Effect</button>
-      <button onclick="resetImage()">Reset</button>
+    
+    <div class="toolbar">
+      <button onclick="applyEffect('grayscale')">B&W</button>
+      <button onclick="applyEffect('sepia')">Retro</button>
+      <button onclick="applyEffect('brightness')">Tuning</button>
+      <button onclick="applyEffect('saturate')">Portrait</button>
+      <button onclick="applyEffect('contrast')">Urban</button>
+      <button onclick="applyEffect('hue')">Nature</button>
+      <button onclick="applyEffect('invert')">Colors</button>
     </div>
+
+    <div class="tools">
+      <button>Crop</button>
+      <button>Adjust</button>
+      <button>Cutout</button>
+      <button>Arrange</button>
+      <button>Effect</button>
+      <button>Filter</button>
+    </div>
+
     <div class="preview">
-      <img id="photo" src="" alt="Preview">
+      <img id="photo" src="" alt="Your Image" />
     </div>
   </div>
   <script src="script.js"></script>
 </body>
-</html>
+      </html>
