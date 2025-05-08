@@ -1,55 +1,131 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SASIYA PHOTO EFFECT</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SASIYA PHOTO EDIT</title>
+  <style>
+    body {
+      background: #1c1c1c;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    input[type="file"] {
+      margin-bottom: 20px;
+    }
+    #editor {
+      margin-top: 20px;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 4px solid #555;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .slider-group {
+      margin: 10px 0;
+    }
+    .slider-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .slider-group input[type="range"] {
+      width: 80%;
+    }
+    button {
+      background: #ff3366;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>SASIYA PHOTO EFFECT</h1>
-        <input type="file" id="upload" accept="image/*">
-        
-        <div class="editor" id="editor-container">
-            <canvas id="canvas"></canvas>
-            <img id="preview" src="" alt="Your Image">
-        </div>
-
-        <div class="controls">
-            <select id="filterSelect">
-                <option value="none">Original</option>
-                <option value="vintage">Vintage</option>
-                <option value="bw">Black & White</option>
-                <option value="cinematic">Cinematic</option>
-                <option value="warm">Warm Tone</option>
-                <option value="cold">Cold Tone</option>
-                <option value="sepia">Sepia</option>
-                <option value="matte">Matte</option>
-                <option value="hdr">HDR Look</option>
-                <option value="glow">Soft Glow</option>
-                <option value="contrast">High Contrast</option>
-                <option value="bright">Bright & Clear</option>
-                <option value="fade">Fade</option>
-                <option value="clarity">Clarity Boost</option>
-                <option value="vibrance">Vibrance Pop</option>
-                <option value="dark">Dark Mood</option>
-                <option value="pastel">Pastel</option>
-                <option value="night">Night Vision</option>
-                <option value="golden">Golden Hour</option>
-                <option value="film">Film Look</option>
-            </select>
-            <input type="text" id="overlayText" placeholder="Enter text for image" />
-            <button onclick="toggleBlur()">Toggle Background Blur</button>
-            <button onclick="rotateImage()">Rotate</button>
-            <button onclick="flipImage()">Flip</button>
-            <button onclick="addCartoonEffect()">Cartoon Effect</button>
-            <button onclick="addFrame()">Add Frame</button>
-            <button onclick="addText()">Add Text</button>
-            <button onclick="downloadImage()">Download Image</button>
-        </div>
+  <h1>SASIYA PHOTO EDIT</h1>
+  <input type="file" accept="image/*" id="upload" />
+  <div id="editor" style="display:none;">
+    <img id="photo" />
+    <div class="slider-group">
+      <label for="brightness">Brightness</label>
+      <input type="range" id="brightness" min="50" max="150" value="100" />
     </div>
-    <script src="script.js"></script>
+    <div class="slider-group">
+      <label for="contrast">Contrast</label>
+      <input type="range" id="contrast" min="50" max="150" value="100" />
+    </div>
+    <div class="slider-group">
+      <label for="saturation">Saturation</label>
+      <input type="range" id="saturation" min="50" max="200" value="100" />
+    </div>
+    <div class="slider-group">
+      <label for="temperature">Temperature</label>
+      <input type="range" id="temperature" min="0" max="200" value="100" />
+    </div>
+    <button onclick="downloadImage()">Download</button>
+  </div>
+
+  <canvas id="canvas" style="display:none;"></canvas>
+
+  <script>
+    const upload = document.getElementById('upload');
+    const photo = document.getElementById('photo');
+    const editor = document.getElementById('editor');
+    const brightness = document.getElementById('brightness');
+    const contrast = document.getElementById('contrast');
+    const saturation = document.getElementById('saturation');
+    const temperature = document.getElementById('temperature');
+
+    upload.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        photo.src = reader.result;
+        editor.style.display = 'block';
+        applyFilters();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    [brightness, contrast, saturation, temperature].forEach(slider => {
+      slider.addEventListener('input', applyFilters);
+    });
+
+    function applyFilters() {
+      const tempValue = temperature.value;
+      const temp = (tempValue - 100) * 0.005;
+      photo.style.filter = `
+        brightness(${brightness.value}%)
+        contrast(${contrast.value}%)
+        saturate(${saturation.value}%)
+        sepia(${Math.max(temp, 0)})
+        hue-rotate(${temp < 0 ? temp * -300 : 0}deg)
+      `;
+    }
+
+    function downloadImage() {
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = photo.naturalWidth;
+      canvas.height = photo.naturalHeight;
+
+      ctx.filter = photo.style.filter;
+      ctx.drawImage(photo, 0, 0, canvas.width, canvas.height);
+
+      const link = document.createElement('a');
+      link.download = 'edited-photo.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+  </script>
 </body>
-</html>
+    </html>
