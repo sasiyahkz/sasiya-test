@@ -11,7 +11,19 @@
     <div class="card">
       <h1>SASIYA GIFT</h1>
       <p>Welcome to the 3D Gift Experience</p>
+      <button id="giftButton">Open Gift</button>
+      <div id="giftMessage">You Got a Gift!</div>
+      <audio id="giftSound" src="sasiya-gift.mp3"></audio>
     </div>
   </div>
+  <script>
+    const button = document.getElementById('giftButton');
+    const message = document.getElementById('giftMessage');
+    const sound = document.getElementById('giftSound');
+    button.addEventListener('click', () => {
+      message.classList.add('show');
+      sound.play();
+    });
+  </script>
 </body>
 </html>
