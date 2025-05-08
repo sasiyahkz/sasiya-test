@@ -1,29 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>SASIYA TIKTOK DOWNLOADER</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <h1>SASIYA TIKTOK DOWNLOADER</h1>
-    <p>Paste your TikTok video link below:</p>
-    <input type="text" id="tiktok-url" placeholder="Enter TikTok video URL"/>
-    <button onclick="downloadVideo()">Download Video</button>
-    <p id="message"></p>
+    <input type="text" id="videoUrl" placeholder="TikTok Video URL එක ඇතුළත් කරන්න">
+    <button onclick="downloadVideo()">Download</button>
+    <div id="result"></div>
   </div>
 
-  <script>
-    function downloadVideo() {
-      const url = document.getElementById('tiktok-url').value;
-      if (!url.includes("tiktok.com")) {
-        document.getElementById("message").innerText = "Invalid TikTok URL.";
-        return;
-      }
-      window.open("https://snaptik.app?url=" + encodeURIComponent(url), "_blank");
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
