@@ -1,62 +1,144 @@
+
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #1c1c1c, #333);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: #111;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(145deg, #1f1f1f, #2b2b2b);
+    border-radius: 20px;
+    box-shadow: 0 0 30px #ff0040;
 }
 
 .editor {
-  text-align: center;
-  background: rgba(255,255,255,0.05);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(255,0,0,0.3);
+    perspective: 1000px;
+    margin: 20px auto;
 }
 
-h1 {
-  margin-bottom: 20px;
+.editor img {
+    max-width: 300px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
 }
 
-input[type="file"] {
-  margin: 15px 0;
-  padding: 10px;
-  border: none;
-  background: #ff004f;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(255,0,79,0.4);
+select, button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #ff0040;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.toolbar, .tools {
-  margin: 10px 0;
+select:hover, button:hover {
+    background: #ff3366;
 }
 
-button {
-  background: linear-gradient(145deg, #1f1f1f, #2a2a2a);
-  border: none;
-  margin: 5px;
-  padding: 10px 15px;
-  color: white;
-  border-radius: 12px;
-  box-shadow: 5px 5px 15px #141414, -5px -5px 15px #3c3c3c;
-  transition: all 0.3s ease;
-  font-weight: bold;
+img.vintage { filter: sepia(0.4) contrast(1.2) brightness(1.1); }
+img.bw { filter: grayscale(100%) contrast(1.2); }
+img.cinematic { filter: contrast(1.4) saturate(1.3); }
+img.warm { filter: brightness(1.1) sepia(0.2); }
+img.cold { filter: brightness(0.9) hue-rotate(180deg); }
+img.sepia { filter: sepia(1); }
+img.matte { filter: contrast(0.8) brightness(1.1); }
+img.hdr { filter: contrast(1.8) brightness(1.2); }
+img.glow { filter: brightness(1.3) blur(0.5px); }
+img.contrast { filter: contrast(2); }
+img.bright { filter: brightness(1.5); }
+img.fade { filter: opacity(0.8) brightness(1.1); }
+img.clarity { filter: contrast(1.5) saturate(1.5); }
+img.vibrance { filter: saturate(2); }
+img.dark { filter: brightness(0.6) contrast(1.2); }
+img.pastel { filter: contrast(0.9) brightness(1.1) saturate(0.8); }
+img.night { filter: brightness(0.6) hue-rotate(230deg); }
+img.golden { filter: brightness(1.1) sepia(0.3) hue-rotate(-10deg); }
+img.film { filter: contrast(1.2) saturate(1.2) sepia(0.2); }
+
+.editor {
+    position: relative;
+    width: fit-content;
+    margin: 20px auto;
 }
 
-button:hover {
-  transform: translateY(-3px);
-  background: #ff3366;
-  box-shadow: 0 0 15px #ff3366;
+.editor::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    filter: blur(15px);
+    background: inherit;
+    z-index: 0;
+    border-radius: 20px;
+    opacity: 0;
+    transition: 0.3s ease;
 }
 
-.preview img {
-  margin-top: 20px;
-  max-width: 300px;
-  border-radius: 15px;
-  transition: all 0.4s ease;
+.editor.blur::before {
+    opacity: 1;
+}
+
+button, select {
+    box-shadow: 0 5px 15px rgba(255,0,64,0.5);
+    transform: perspective(1px) translateZ(0);
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover, select:hover {
+    transform: scale(1.05) rotateX(5deg);
+}
+
+.toggle-blur {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: #0099ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,153,255,0.5);
+}
+
+canvas {
+    display: none;
+}
+
+.controls {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.controls input[type="text"] {
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    width: 200px;
+}
+
+img.framed {
+    border: 10px solid white;
+    box-shadow: 0 0 20px rgba(255,255,255,0.5);
+}
+
+img.cartoon {
+    filter: contrast(1.8) saturate(1.5) brightness(1.1);
 }
