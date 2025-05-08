@@ -1,41 +1,57 @@
 body {
-  background: linear-gradient(145deg, #0f2027, #203a43, #2c5364);
-  color: white;
+  margin: 0;
   font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1c1c1c, #333);
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-.container {
+.editor {
   text-align: center;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255,255,255,0.05);
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+  box-shadow: 0 0 25px rgba(255,0,0,0.3);
 }
 
 h1 {
-  font-size: 2em;
   margin-bottom: 20px;
 }
 
-.controls button {
-  background: #ff004f;
+input[type="file"] {
+  margin: 15px 0;
+  padding: 10px;
   border: none;
+  background: #ff004f;
   color: white;
-  padding: 10px 20px;
-  margin: 10px;
   border-radius: 10px;
-  font-weight: bold;
-  box-shadow: 0 0 10px #ff004f;
   cursor: pointer;
-  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(255,0,79,0.4);
 }
 
-.controls button:hover {
+.toolbar, .tools {
+  margin: 10px 0;
+}
+
+button {
+  background: linear-gradient(145deg, #1f1f1f, #2a2a2a);
+  border: none;
+  margin: 5px;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 5px 5px 15px #141414, -5px -5px 15px #3c3c3c;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+button:hover {
+  transform: translateY(-3px);
   background: #ff3366;
+  box-shadow: 0 0 15px #ff3366;
 }
 
 .preview img {
