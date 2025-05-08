@@ -1,38 +1,55 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SASIYA AI PHOTO EDIT</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASIYA LIGHTROOM EFFECT</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="editor">
-    <h1>SASIYA AI PHOTO EDIT</h1>
-    <input type="file" id="upload" accept="image/*">
-    
-    <div class="toolbar">
-      <button onclick="applyEffect('grayscale')">B&W</button>
-      <button onclick="applyEffect('sepia')">Retro</button>
-      <button onclick="applyEffect('brightness')">Tuning</button>
-      <button onclick="applyEffect('saturate')">Portrait</button>
-      <button onclick="applyEffect('contrast')">Urban</button>
-      <button onclick="applyEffect('hue')">Nature</button>
-      <button onclick="applyEffect('invert')">Colors</button>
-    </div>
+    <div class="container">
+        <h1>SASIYA LIGHTROOM EFFECT</h1>
+        <input type="file" id="upload" accept="image/*">
+        
+        <div class="editor" id="editor-container">
+            <canvas id="canvas"></canvas>
+            <img id="preview" src="" alt="Your Image">
+        </div>
 
-    <div class="tools">
-      <button>Crop</button>
-      <button>Adjust</button>
-      <button>Cutout</button>
-      <button>Arrange</button>
-      <button>Effect</button>
-      <button>Filter</button>
+        <div class="controls">
+            <select id="filterSelect">
+                <option value="none">Original</option>
+                <option value="vintage">Vintage</option>
+                <option value="bw">Black & White</option>
+                <option value="cinematic">Cinematic</option>
+                <option value="warm">Warm Tone</option>
+                <option value="cold">Cold Tone</option>
+                <option value="sepia">Sepia</option>
+                <option value="matte">Matte</option>
+                <option value="hdr">HDR Look</option>
+                <option value="glow">Soft Glow</option>
+                <option value="contrast">High Contrast</option>
+                <option value="bright">Bright & Clear</option>
+                <option value="fade">Fade</option>
+                <option value="clarity">Clarity Boost</option>
+                <option value="vibrance">Vibrance Pop</option>
+                <option value="dark">Dark Mood</option>
+                <option value="pastel">Pastel</option>
+                <option value="night">Night Vision</option>
+                <option value="golden">Golden Hour</option>
+                <option value="film">Film Look</option>
+            </select>
+            <input type="text" id="overlayText" placeholder="Enter text for image" />
+            <button onclick="toggleBlur()">Toggle Background Blur</button>
+            <button onclick="rotateImage()">Rotate</button>
+            <button onclick="flipImage()">Flip</button>
+            <button onclick="addCartoonEffect()">Cartoon Effect</button>
+            <button onclick="addFrame()">Add Frame</button>
+            <button onclick="addText()">Add Text</button>
+            <button onclick="downloadImage()">Download Image</button>
+        </div>
     </div>
-
-    <div class="preview">
-      <img id="photo" src="" alt="Your Image" />
-    </div>
-  </div>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
-      </html>
+</html>
