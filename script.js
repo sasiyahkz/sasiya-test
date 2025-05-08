@@ -1,29 +1,30 @@
-async function downloadVideo() {
-  const url = document.getElementById("videoUrl").value;
-  const resultDiv = document.getElementById("result");
-
+function downloadVideo() {
+  const url = document.getElementById("tiktokUrl").value.trim();
   if (!url) {
-    resultDiv.innerHTML = "Please enter a video URL.";
+    alert("Please enter a TikTok video URL.");
     return;
   }
 
-  try {
-    const response = await fetch(`https://tiktok-downloader-download-videos-without-watermark.p.rapidapi.com/vid/index?url=${encodeURIComponent(url)}`, {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': '66839d11cfmshc4c4e55a34e5a6bp1c42b9jsna9fb1862b7a9',
-        'X-RapidAPI-Host': 'tiktok-downloader-download-videos-without-watermark.p.rapidapi.com'
-      }
-    });
-
-    const data = await response.json();
-    if (data.video && data.video.no_watermark) {
-      resultDiv.innerHTML = \`<a href="\${data.video.no_watermark}" download>Click here to download the video</a>\`;
-    } else {
-      resultDiv.innerHTML = "Video download link not found.";
+  fetch(`https://tiktok-video-no-watermark.p.rapidapi.com/video?url=${encodeURIComponent(url)}`, {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '66839d11cfmshc4c4e55a34e5a6bp1c42b9jsna9fb1862b7a9',
+      'X-RapidAPI-Host': 'tiktok-video-no-watermark.p.rapidapi.com'
     }
-  } catch (error) {
-    console.log(error);
-    resultDiv.innerHTML = "Error fetching video.";
-  }
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.video) {
+        document.getElementById("result").innerHTML = `
+          <p>Download Ready:</p>
+          <a href="${data.video}" target="_blank" download>Click here to download</a>
+        `;
+      } else {
+        document.getElementById("result").innerHTML = `<p>Video not found. Please check the URL.</p>`;
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById("result").innerHTML = `<p>Error fetching video. Try again.</p>`;
+    });
 }
