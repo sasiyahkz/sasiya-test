@@ -13,16 +13,21 @@
       <p>Welcome to the 3D Gift Experience</p>
       <button id="giftButton">Open Gift</button>
       <div id="giftMessage">You Got a Gift!</div>
-      <audio id="giftSound" src="sasiya-gift.mp3"></audio>
     </div>
   </div>
+  <div class="fireworks" id="fireworks"></div>
+  <audio id="giftSound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
   <script>
     const button = document.getElementById('giftButton');
     const message = document.getElementById('giftMessage');
     const sound = document.getElementById('giftSound');
+    const fireworks = document.getElementById('fireworks');
+
     button.addEventListener('click', () => {
       message.classList.add('show');
       sound.play();
+      fireworks.classList.add('explode');
+      setTimeout(() => fireworks.classList.remove('explode'), 3000);
     });
   </script>
 </body>
